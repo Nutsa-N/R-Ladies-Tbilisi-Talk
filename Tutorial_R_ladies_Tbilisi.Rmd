@@ -1,7 +1,7 @@
 ---
 title: "Data Manipulation with Tidyverse - Tutorial"
+author: "Nutsa Nanuashvili https://github.com/Nutsa-N"
 output: html_document
-author: Nutsa Nanuashvili https://github.com/Nutsa-N
 ---
 
 ```{r setup, include=FALSE}
@@ -28,7 +28,7 @@ library(tidyverse)
 https://tidyr.tidyverse.org/articles/tidy-data.html#data-tidying-1
 
 ### From messy to tidy data
-![](table02.png)
+![](figures/table02.png)
 
 
 ## [_Penguin Data_](https://allisonhorst.github.io/palmerpenguins/)
@@ -49,8 +49,8 @@ data(package = 'palmerpenguins')
 read_csv(file, col_names = TRUE, col_types = NULL, na = c("", "NA"))
 ```
 
-```{r}
-penguin_data = read_csv("penguins_data.csv")
+```{r, message = FALSE}
+penguin_data = read_csv("dataset/penguins_data.csv")
 ```
 
 ## First Overview at Data
@@ -93,7 +93,7 @@ The functions for converting variable types are:
 
 ```{r}
 #save the result as another tibble 
-penguin_data02 = read_csv("penguins_data.csv", 
+penguin_data02 = read_csv("dataset/penguins_data.csv", 
          col_types = cols(species = col_factor(c("Adelie",  "Gentoo",  "Chinstrap")),
               island = col_factor(c("Torgersen","Biscoe", "Dream")),
                sex = col_factor(c("female", "male")),
