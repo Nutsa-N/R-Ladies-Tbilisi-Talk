@@ -9,7 +9,7 @@ library(tidyverse)
 penguin_data = read_csv(str_c(file_path, "penguins_data.csv"))
 
 
-
+#-------1---------
 # 1. Run #slice_tail and slice_sample - same syntax as slice_head from the slides
 # Choose n number by yourself. See how the slice_sample gives different results every time
 # What's the name of the island from the last row? 
@@ -25,7 +25,10 @@ glimpse (...)
 # Which columns have the right type and what needs to be converted? To what?
 # Check out the columns called date and year. Do we need both? 
 
-# 3. Re-load the file running read_csv, this time specify column types we need to coerce and skip the column like ion the slides.
+#----------2--------------
+
+# 3. Re-load the file running read_csv, this time specify column types 
+# we need to coerce and skip the column like in the slides.
 
 penguin_data02 = read_csv(str_c(file_path, "dataset/penguins_data.csv", 
                           col_types = cols(species = col_factor(c("Adelie",  "Gentoo",  "Chinstrap")),
@@ -40,12 +43,13 @@ penguin_data02 = read_csv(str_c(file_path, "dataset/penguins_data.csv",
 
 ...()
 
-# --------- 2 ------------------
-# use summary() with %>% operator
 
-penguin_data02 %>% summary()
 
 # --------- 3 ------------------
+# use summary() with %>% operator with penguin_data02 
+
+... %>% ... 
+
 
 # Reshape penguin into tidy data - convert it into wider format like shown in the slides 
 
@@ -53,7 +57,8 @@ penguin_data02 %>% summary()
 
 penguin_df_wide = ... 
 
-#see the first or last 10 rows and pick one of the methods to explore the data set for instance, glimpse, str, dim or summary 
+#print the first or last 10 rows and pick one of the methods to explore the data set, for instance
+# glimpse, str, dim or summary 
 
 # --your code here-- 
 
@@ -72,7 +77,7 @@ df1
 df2 = d1 %>% ...
 df2
 
-#3. Select only the columns that ends with "g" and contain word "length"
+#3. Select only the columns that end with "g" and contain word "length"
 penguin_df_wide %>% ...
 
 #4. Pick 3 columns and rename using select()
@@ -90,7 +95,7 @@ penguin_df_wide %>%
 # rename id to individual_id, year - date and island - location  
 rename(...) %>%
   # Rearrange columns so that sex and id are the 1st two columns followed by the rest 
-  # Which on eis the correct name to use "id" or "individual_id"? 
+  # Which one is the correct name to use "id" or "individual_id"? 
   select(...) %>%
   # drop missing values
   ...() %>%
@@ -103,8 +108,12 @@ penguin_df_wide %>% ... (...) %>%
   # print random 5 rows
   ...(...)
 
-#8. select only the categorical columns 
+#8. select only the categorical columns (is.factor)
 penguin_df_wide %>% ...(...(...))
+
+
+
+# ------------- 5 ------------------
 
 # -----------Changing column values with mutate()-------------
 
@@ -112,7 +121,7 @@ penguin_df_wide %>% ...(...(...))
 penguin_df_wide %>% 
   ...(bill_depth_length_ratio = ...)
 
-#2. Now write the same code using transmute()
+#2. Now write the same code using transmute() instead 
 # Look at the difference
 
 #3. 
@@ -125,8 +134,9 @@ penguin_df_wide %>%
   ...(... (...(),
           round )
   ) 
-#4. #create a new column to categorize penguins based on their flipper length - 
-#equal or longer than median - long_flipper, otherwise - short_flipper
+
+#4. create a new column to categorize penguins based on their flipper length - 
+# equal or longer than median - long_flipper, otherwise - short_flipper
 
 #median_flipper_length = 197mm
 median_flipper_length = median(penguin_df_wide$flipper_length_mm, na.rm = T)
@@ -139,7 +149,7 @@ penguin_df_wide %>%
   slice_sample(n = 10)
 
 
-# --------- arrange rows ---------
+# --------- 6 ---------
 
 #1. Filter only the rows corresponding to year 2009 for female penguins only and sort the rows in descending order of flipper_length
 penguin_df_wide %>%

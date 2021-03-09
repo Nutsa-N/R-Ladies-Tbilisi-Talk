@@ -19,7 +19,7 @@ https://www.tidyverse.org/
 
 Load **tidyverse**
 ```{r}
-library(tidyverse)
+suppressMessages(library(tidyverse)) 
 ```
 
 
@@ -40,9 +40,12 @@ data(package = 'palmerpenguins')
 ```
 read_csv(file, col_names = TRUE, col_types = NULL, na = c("", "NA"))
 ```
+```{r, echo = FALSE}
+file_path = "~/Projects/R_ladies_Tbilisi/R-Ladies-Tbilisi-Talk/"
+```
 
 ```{r, message = FALSE}
-penguin_data = read_csv("dataset/penguins_data.csv")
+penguin_data = read_csv(str_c(file_path, "dataset/penguins_data.csv") )
 
 ```
 
@@ -92,7 +95,7 @@ The functions for converting variable types are:
 ```{r}
 
 #save the result as another tibble 
-penguin_data02 = read_csv("dataset/penguins_data.csv", 
+penguin_data02 = read_csv(str_c(file_path, "dataset/penguins_data.csv"), 
          col_types = cols(species = col_factor(c("Adelie",  "Gentoo",  "Chinstrap")),
               island = col_factor(c("Torgersen","Biscoe", "Dream")),
                sex = col_factor(c("female", "male")),
@@ -219,16 +222,16 @@ Now, let's check whether we have a tidy data or not
 Let's convert/reshape it to a wider format using `pivot_()` functions from `tidyr` package
 
 ```{r}
-# # save the output  as penguin_df_wide
-# penguin_df_wide = penguin_data02 %>%
-#   pivot_wider(names_from = measurements,
-#               values_from = values) 
-# 
-# #see the first 10 rows  
-# slice_head(penguin_df_wide, n = 8)
-# 
-# #see the structure of the data
-#   glimpse(penguin_df_wide)
+# save the output  as penguin_df_wide
+penguin_df_wide = penguin_data02 %>%
+  pivot_wider(names_from = measurements,
+              values_from = values)
+
+#see the first 10 rows
+slice_head(penguin_df_wide, n = 8)
+
+#see the structure of the data
+  glimpse(penguin_df_wide)
 ```
 
 | Just to compare we can turn it back to longer data using `pivot_longer` These functions mirror each other. 
@@ -249,30 +252,30 @@ Exploring again to compare to the longer version
 
 `dim(), slice_head(), slice_tail(), summary(), names/colnames(), rownames(), str (), glimpse(), levels ()`
 ```{r}
-dim(penguin_df_wide)
+#dim(penguin_df_wide)
 
-slice_tail(penguin_df_wide, n = 3)
-
-str(penguin_df_wide)
+# slice_tail(penguin_df_wide, n = 3)
+# 
+# str(penguin_df_wide)
 
 # print factor levels of 3 columns
-sapply(
-  penguin_df_wide[, c("species", "island", "sex")], 
-  FUN = levels
-  )
+# sapply(
+# penguin_df_wide[, c("species", "island", "sex")],
+# FUN = levels
+# )
 
 # to see character vector of column names
-colnames(penguin_df_wide)
+#colnames(penguin_df_wide)
 ```
 ```{r}
-summary(penguin_df_wide)
+#summary(penguin_df_wide)
 ```
 
 ## Data Manipulation and Transformation Tricks
  
 ### [`dplyr`](https://dplyr.tidyverse.org/)
  
-### [`select()`](https://dplyr.tidyverse.org/reference/select.html) Selects columns by their name and returns tibble
+### [`select()`](https://dplyr.tidyverse.org/reference/select.html) Selects columns by their name and returns a tibble
  
 ```{r}
 penguin_df_wide %>%
@@ -293,11 +296,11 @@ penguin_df_wide %>%
 
 Exclude selected rows with `-` sign in front of their names
 ```{r}
-penguin_df_wide %>%
-   
-  select(- (year:id) ) %>%
-  
-  slice_sample(n = 5)
+# penguin_df_wide %>%
+#    
+#   select(- (year:id) ) %>%
+#   
+#   slice_sample(n = 5)
 
 ```
 
